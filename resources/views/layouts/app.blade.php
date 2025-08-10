@@ -197,15 +197,9 @@
 
         <!-- Main Layout -->
         <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Main Content -->
-            <main class="flex-1 lg:flex-none lg:w-2/3">
+            <main class="flex-1 lg:flex-none lg:w-3/3">
                 @yield('content')
             </main>
-
-            <!-- Sidebar -->
-            <aside class="lg:w-1/3">
-                @yield('sidebar')
-            </aside>
         </div>
     </div>
 </body>

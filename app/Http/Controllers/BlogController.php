@@ -15,8 +15,7 @@ class BlogController extends Controller
             ->with(['user', 'category'])
             ->recent()
             ->get();
-
-        // Nomes dos meses em português
+            
         $monthNames = [
             1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril',
             5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto',

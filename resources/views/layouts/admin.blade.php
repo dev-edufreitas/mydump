@@ -16,7 +16,6 @@
     @stack('styles')
 </head>
 <body class="bg-white font-sans antialiased">
-    <!-- Navigation -->
     <nav class="bg-white border-b border-gray-100">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-between h-16">
