@@ -175,26 +175,30 @@ const quill = new Quill('#editor', {
                 [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                 [{ 'align': [] }],
                 ['link', 'image'],
-                ['clean']
+                ['clean'],
             ]
         }
-    });
+    }),
+    contentInput = document.getElementById('content');
 
 // Restaura conteúdo após validação falhar
 @if(old('content'))
     quill.root.innerHTML = @json(old('content'));
+    contentInput.value = @json(old('content'));
 @endif
 
-// Copia o HTML do Quill para o campo hidden antes de enviar
+// Atualiza o campo hidden sempre que o texto mudar
+quill.on('text-change', function () {
+    contentInput.value = quill.root.innerHTML;
+});
+
+// Valida antes de enviar
 const form = document.querySelector('form');
 form.addEventListener('submit', function (e) {
-    const content = quill.root.innerHTML;
-    if (content.trim() === '<p><br></p>' || content.trim() === '') {
+    if (quill.getText().trim().length === 0) {
         e.preventDefault();
         alert('Por favor, adicione conteúdo ao post.');
-        return false;
     }
-    document.getElementById('content').value = content;
 });
 </script>
 @endpush
