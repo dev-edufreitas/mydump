@@ -9,39 +9,40 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('styles')
 </head>
-<body class="bg-gray-100 font-sans antialiased">
+<body class="bg-white font-sans antialiased">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="bg-white border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href="{{ route('admin.posts.index') }}" class="text-xl font-bold text-gray-900">
-                        Admin - mydump.xyz
+                    <a href="{{ route('admin.posts.index') }}" class="text-lg font-semibold text-gray-900">
+                        mydump.xyz
                     </a>
-                    <div class="ml-8 flex space-x-4">
+                    <div class="ml-12 flex space-x-8">
                         <a href="{{ route('admin.posts.index') }}" 
-                           class="text-gray-700 hover:text-gray-900 px-3 py-2 {{ request()->routeIs('admin.posts.*') ? 'border-b-2 border-blue-500' : '' }}">
+                           class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('admin.posts.*') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
                             Posts
                         </a>
                         <a href="{{ route('admin.categories.index') }}" 
-                           class="text-gray-700 hover:text-gray-900 px-3 py-2 {{ request()->routeIs('admin.categories.*') ? 'border-b-2 border-blue-500' : '' }}">
+                           class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('admin.categories.*') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
                             Categorias
                         </a>
                     </div>
                 </div>
                 
-                <div class="flex items-center space-x-4">
-                    <a href="{{ route('blog.index') }}" class="text-gray-700 hover:text-gray-900">
+                <div class="flex items-center space-x-6">
+                    <a href="{{ route('blog.index') }}" class="text-sm font-medium text-gray-500 hover:text-gray-900">
                         Ver Blog
                     </a>
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
-                        <button type="submit" class="text-gray-700 hover:text-gray-900">
+                        <button type="submit" class="text-sm font-medium text-gray-500 hover:text-gray-900">
                             Sair
                         </button>
                     </form>
@@ -51,20 +52,22 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <main class="max-w-6xl mx-auto py-8 px-6">
         @if(session('success'))
-            <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+            <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg text-sm">
                 {{ session('success') }}
             </div>
         @endif
 
         @if(session('error'))
-            <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            <div class="mb-6 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg text-sm">
                 {{ session('error') }}
             </div>
         @endif
 
         @yield('content')
     </main>
+
+    @stack('scripts')
 </body>
 </html>
