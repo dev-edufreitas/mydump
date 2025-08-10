@@ -64,6 +64,12 @@ body {
     position: relative;
 }
 
+.post-card:hover .post-excerpt {
+    filter: blur(0px);           /* Remove o blur */
+    color: #374151;              /* Escurece o texto */
+    transform: translateY(-1px); /* Movimento sutil */
+}
+
 .post-item::before {
     content: '•';
     position: absolute;

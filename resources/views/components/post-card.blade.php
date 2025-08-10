@@ -5,7 +5,7 @@
        aria-label="Abrir post: {{ $post->title }}"
        class="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:ring-offset-white">
         <article
-            class="relative aspect-square rounded-2xl bg-white border border-black/10
+            class="post-card relative aspect-square rounded-2xl bg-white border border-black/10
                    shadow-sm ring-1 ring-black/5
                    transition-all duration-200 ease-out will-change-transform
                    hover:-translate-y-0.5 hover:shadow-md hover:border-black">
@@ -16,8 +16,9 @@
                     {{ $post->title }}
                 </h3>
 
-                <!-- Excerpt -->
-                <p class="mt-2 text-xs sm:text-sm text-gray-500 line-clamp-4 blur-[1.5px]">
+                <!-- Excerpt com efeito simples -->
+                <p class="post-excerpt mt-2 text-xs sm:text-sm text-gray-500 line-clamp-4 blur-[1.5px] 
+                          transition-all duration-300 ease-out">
                     {{ $post->excerpt ?? \Illuminate\Support\Str::limit(strip_tags($post->content ?? ''), 140) }}
                 </p>
             </div>
