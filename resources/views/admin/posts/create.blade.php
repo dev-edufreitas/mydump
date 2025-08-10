@@ -8,7 +8,7 @@
     <p class="mt-1 text-sm text-gray-600">Adicione um novo post ao seu blog</p>
 </div>
 
-<form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+<form id="post-form" action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
     @csrf
     
     <!-- Informações Básicas -->
@@ -161,11 +161,11 @@
 </style>
 @endpush
 
+
 @push('scripts')
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const quill = new Quill('#editor', {
+const quill = new Quill('#editor', {
         theme: 'snow',
         placeholder: 'Comece a escrever seu post...',
         modules: {
@@ -180,22 +180,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Restaura conteúdo após validação falhar
-    @if(old('content'))
-        quill.root.innerHTML = @json(old('content'));
-    @endif
+// Restaura conteúdo após validação falhar
+@if(old('content'))
+    quill.root.innerHTML = @json(old('content'));
+@endif
 
-    // Copia o HTML do Quill para o campo hidden antes de enviar
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function (e) {
-        const content = quill.root.innerHTML;
-        if (content.trim() === '<p><br></p>' || content.trim() === '') {
-            e.preventDefault();
-            alert('Por favor, adicione conteúdo ao post.');
-            return false;
-        }
-        document.getElementById('content').value = content;
-    });
+// Copia o HTML do Quill para o campo hidden antes de enviar
+const form = document.getElementById('post-form');
+form.addEventListener('submit', function (e) {
+    const content = quill.root.innerHTML;
+    if (content.trim() === '<p><br></p>' || content.trim() === '') {
+        e.preventDefault();
+        alert('Por favor, adicione conteúdo ao post.');
+        return false;
+    }
+    document.getElementById('content').value = content;
 });
 </script>
 @endpush
