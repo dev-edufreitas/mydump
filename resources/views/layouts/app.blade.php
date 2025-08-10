@@ -174,7 +174,7 @@
 <body class="bg-white">
     <!-- Titulo -->
         <div class="title-bar mb-10">
-            <a href="{{ route('blog.index') }}" >
+            <a href="{{ route('blog.index') }}" class="text-lg font-semibold text-gray-900" >
                 @yield('blog-title', 'mydump.xyz')
             </a>
         </div>

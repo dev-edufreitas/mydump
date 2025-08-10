@@ -26,5 +26,5 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
 // Rota de fallback para páginas antigas
 Route::fallback(function () {
-    return view('welcome');
+    return view('/');
 });

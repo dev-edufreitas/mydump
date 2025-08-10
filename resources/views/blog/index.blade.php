@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Blog - Página Inicial')
+@section('title', 'mydump.xyz - Página Inicial')
 
 @section('description', 'Últimos posts do nosso blog')
 
