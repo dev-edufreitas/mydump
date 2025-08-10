@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $post->title)
+@section('title', ' mydump.xyz - '.  $post->title)
 @section('description', $post->excerpt)
 
 @section('content')

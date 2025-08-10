@@ -16,7 +16,7 @@
     @stack('styles')
 </head>
 <body class="bg-white font-sans antialiased">
-    <nav class="bg-white border-b border-gray-100">
+    <nav class="admin-nav">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -25,11 +25,11 @@
                     </a>
                     <div class="ml-12 flex space-x-8">
                         <a href="{{ route('admin.posts.index') }}" 
-                           class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('admin.posts.*') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
+                           class="admin-nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">
                             Posts
                         </a>
                         <a href="{{ route('admin.categories.index') }}" 
-                           class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('admin.categories.*') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
+                           class="admin-nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
                             Categorias
                         </a>
                     </div>
@@ -52,17 +52,8 @@
 
     <!-- Main Content -->
     <main class="max-w-6xl mx-auto py-8 px-6">
-        @if(session('success'))
-            <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg text-sm">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="mb-6 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg text-sm">
-                {{ session('error') }}
-            </div>
-        @endif
+        <x-alert type="success" :message="session('success')" />
+        <x-alert type="error" :message="session('error')" />
 
         @yield('content')
     </main>

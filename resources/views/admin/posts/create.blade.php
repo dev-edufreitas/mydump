@@ -12,36 +12,21 @@
     @csrf
     
     <!-- Informações Básicas -->
-    <div class="bg-white rounded-lg border border-gray-100 p-6">
+    <div class="admin-card admin-card-body">
         <h2 class="text-lg font-medium text-gray-900 mb-6">Informações Básicas</h2>
         
         <div class="space-y-6">
-            <div>
-                <label for="title" class="block text-sm font-medium text-gray-900 mb-2">
-                    Título <span class="text-red-500">*</span>
-                </label>
-                <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    required
-                    class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm"
-                    placeholder="Digite o título do post"
-                    value="{{ old('title') }}"
-                >
-                @error('title')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
+            <x-form-field 
+                label="Título" 
+                name="title" 
+                :required="true"
+                placeholder="Digite o título do post" 
+                :value="old('title')" />
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="category_id" class="block text-sm font-medium text-gray-900 mb-2">Categoria</label>
-                    <select
-                        name="category_id"
-                        id="category_id"
-                        class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm"
-                    >
+                <div class="form-group">
+                    <label for="category_id" class="form-label">Categoria</label>
+                    <select name="category_id" id="category_id" class="form-input">
                         <option value="">Selecione uma categoria</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
@@ -50,58 +35,42 @@
                         @endforeach
                     </select>
                     @error('category_id')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <div>
-                    <label for="featured_image" class="block text-sm font-medium text-gray-900 mb-2">Imagem Destacada</label>
-                    <input
-                        type="file"
-                        name="featured_image"
-                        id="featured_image"
-                        accept="image/*"
-                        class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-sm file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100"
-                    >
-                    @error('featured_image')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+                <x-form-field 
+                    label="Imagem Destacada" 
+                    name="featured_image" 
+                    type="file"
+                    accept="image/*" />
             </div>
 
-            <div>
-                <label for="excerpt" class="block text-sm font-medium text-gray-900 mb-2">Resumo</label>
-                <textarea
-                    name="excerpt"
-                    id="excerpt"
-                    rows="3"
-                    class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm"
-                    placeholder="Resumo opcional do post (será gerado automaticamente se deixado em branco)"
-                >{{ old('excerpt') }}</textarea>
-                @error('excerpt')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
+            <x-form-field 
+                label="Resumo" 
+                name="excerpt" 
+                type="textarea"
+                :rows="3"
+                placeholder="Resumo opcional do post (será gerado automaticamente se deixado em branco)"
+                :value="old('excerpt')" />
         </div>
     </div>
 
-    <!-- Conteúdo (TinyMCE) -->
-    <div class="bg-white rounded-lg border border-gray-100 p-6">
+    <!-- Conteúdo -->
+    <div class="admin-card admin-card-body">
         <h2 class="text-lg font-medium text-gray-900 mb-4">Conteúdo</h2>
 
-        <label for="content" class="block text-sm font-medium text-gray-900 mb-2">
-            Conteúdo do Post <span class="text-red-500">*</span>
-        </label>
-
-        <textarea id="content" name="content">{!! old('content') !!}</textarea>
-
-        @error('content')
-            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-        @enderror
+        <x-form-field 
+            label="Conteúdo do Post" 
+            name="content" 
+            type="textarea"
+            :required="true"
+            id="content"
+            :value="old('content')" />
     </div>
 
     <!-- Publicação -->
-    <div class="bg-white rounded-lg border border-gray-100 p-6">
+    <div class="admin-card admin-card-body">
         <h2 class="text-lg font-medium text-gray-900 mb-6">Publicação</h2>
         <input type="hidden" name="is_published" value="0">
         
@@ -126,10 +95,10 @@
 
     <!-- Ações -->
     <div class="flex justify-end gap-3">
-        <a href="{{ route('admin.posts.index') }}" class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+        <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">
             Cancelar
         </a>
-        <button type="submit" class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">
+        <button type="submit" class="btn btn-primary">
             Criar Post
         </button>
     </div>
